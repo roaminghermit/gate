@@ -73,10 +73,11 @@ jobs:
       - name: Wait before deploy retry
         if: steps.deployment.outcome == 'failure'
         run: sleep 60
-  
+
       - name: Deploy to GitHub Pages (retry)
-      id: deployment_retry
-      if: steps.deployment.outcome == 'failure'
-      uses: actions/deploy-pages@v4
+        id: deployment_retry
+        if: steps.deployment.outcome == 'failure'
+        uses: actions/deploy-pages@v4
+
       - name: Show site URL
         run: 'echo "site: https://roaminghermit.github.io/gate/ (deploy outcome - attempt 1: ${{ steps.deployment.outcome }}, retry: ${{ steps.deployment_retry.outcome }})"'
